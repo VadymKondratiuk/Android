@@ -6,10 +6,6 @@ import ResultFragment from './pages/ResultFragment';
 import HomeFragment from './pages/HomeFragment';
 
 export default function App() {
-  // Використовуємо currentFragment для контролю відображення:
-  // 'home'   – початковий екран;
-  // 'input'  – екран введення замовлення;
-  // 'result' – екран відображення замовлення.
   const [currentFragment, setCurrentFragment] = useState('home');
   const [orderDetails, setOrderDetails] = useState(null);
 
@@ -22,7 +18,6 @@ export default function App() {
   };
 
   const handleCancel = () => {
-    // Повертаємося до початкового екрану
     setOrderDetails(null);
     setCurrentFragment('home');
   };
