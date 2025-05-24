@@ -16,7 +16,6 @@ const InputFragment = ({ onSubmit, onCancel }) => {
       return;
     }
 
-    // Формуємо дані ордеру
     const orderData = 
       `Ім'я: ${name}\n` +
       `Тип піци: ${type}\n` +
@@ -24,21 +23,17 @@ const InputFragment = ({ onSubmit, onCancel }) => {
       `Додаткові: ${extra.length > 0 ? extra.join(', ') : 'Без додаткових опцій'}\n` +
       `-------------------------\n`;
 
-    // Шлях до файлу
     const fileUri = FileSystem.documentDirectory + 'order.txt';
 
     try {
-      // Спочатку отримуємо поточний вміст файла, якщо він існує
       let existingData = '';
       const fileInfo = await FileSystem.getInfoAsync(fileUri);
       if (fileInfo.exists) {
         existingData = await FileSystem.readAsStringAsync(fileUri, { encoding: FileSystem.EncodingType.UTF8 });
       }
-      // Додаємо нові дані до існуючих
       const newData = existingData + orderData;
       await FileSystem.writeAsStringAsync(fileUri, newData, { encoding: FileSystem.EncodingType.UTF8 });
 
-      // Вивід алерту з кнопкою "ОК"
       Alert.alert(
         'Замовлення збережено',
         `Файл збережено за адресою: ${fileUri}`,

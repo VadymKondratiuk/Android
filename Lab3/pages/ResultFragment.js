@@ -14,15 +14,12 @@ const ResultFragment = ({ onCancel }) => {
   const [orders, setOrders] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  // Визначимо шлях до файлу, щоб мати до нього доступ у всіх функціях
   const fileUri = FileSystem.documentDirectory + 'order.txt';
 
   useEffect(() => {
     const loadOrderData = async () => {
       try {
         const content = await FileSystem.readAsStringAsync(fileUri, { encoding: FileSystem.EncodingType.UTF8 });
-        // Розбиваємо вміст файлу за роздільником.
-        // Використовується роздільник "-------------------------"
         const ordersArray = content
           .split('-------------------------')
           .map(order => order.trim())
@@ -38,7 +35,6 @@ const ResultFragment = ({ onCancel }) => {
     loadOrderData();
   }, []);
 
-  // Функція для оновлення файлу з актуальними замовленнями
   const updateFile = async (newOrders) => {
     const newContent =
       newOrders.length > 0
@@ -51,7 +47,6 @@ const ResultFragment = ({ onCancel }) => {
     }
   };
 
-  // Функція видалення замовлення за індексом із підтвердженням
   const deleteOrder = (orderIndex) => {
     Alert.alert(
       'Видалення замовлення',
